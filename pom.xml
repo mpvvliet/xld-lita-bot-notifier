@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.xebialabs.xldeploy.notifier</groupId>
-  <artifactId>xld-luna-bot-notifier</artifactId>
+  <artifactId>xld-lita-bot-notifier</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>xld-luna-bot-notifier</name>
+  <name>xld-lita-bot-notifier</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -25,6 +25,20 @@
          <scope>system</scope>
          <version>2015.6.3</version>
          <systemPath>/opt/xl-deploy-5.1.3-server/lib/engine-spi-2015.6.3.jar</systemPath>
+      </dependency>
+      <dependency>
+         <groupId>com.xebialabs.xldeploy</groupId>
+         <artifactId>udm-plugin-api</artifactId>
+         <scope>system</scope>
+         <version>2015.6.3</version>
+         <systemPath>/opt/xl-deploy-5.1.3-server/lib/udm-plugin-api-2015.6.3.jar</systemPath>
+      </dependency>
+      <dependency>
+         <groupId>com.xebialabs.xldeploy</groupId>
+         <artifactId>engine-api</artifactId>
+         <scope>system</scope>
+         <version>2015.6.3</version>
+         <systemPath>/opt/xl-deploy-5.1.3-server/lib/engine-api-2015.6.3.jar</systemPath>
       </dependency>
       <dependency>
          <groupId>nl.javadude.t2bus</groupId>

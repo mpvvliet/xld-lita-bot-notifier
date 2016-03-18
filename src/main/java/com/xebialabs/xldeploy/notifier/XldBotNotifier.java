@@ -1,7 +1,5 @@
 package com.xebialabs.xldeploy.notifier;
 
-import nl.javadude.t2bus.Subscribe;
-
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -12,9 +10,14 @@ import com.xebialabs.deployit.engine.spi.event.TaskCancelledEvent;
 import com.xebialabs.deployit.engine.spi.event.TaskScheduledEvent;
 import com.xebialabs.deployit.engine.spi.event.TaskStartedEvent;
 import com.xebialabs.deployit.engine.spi.event.TaskStoppedEvent;
+import com.xebialabs.deployit.engine.spi.execution.ExecutionStateListener;
+import com.xebialabs.deployit.engine.spi.execution.StepExecutionStateEvent;
+import com.xebialabs.deployit.engine.spi.execution.TaskExecutionStateEvent;
+
+import nl.javadude.t2bus.Subscribe;
 
 @DeployitEventListener
-public class XldBotNotifier {
+public class XldBotNotifier implements ExecutionStateListener {
 	
 	private static String BOT_URL = "http://localhost:8080";
 	
@@ -54,6 +57,19 @@ public class XldBotNotifier {
 				  .asString();
 		if (jsonResponse.getStatus() != 200) {
 			System.out.println("Error invoking bot: " + jsonResponse.getStatus());
+		}
+	}
+
+	@Override
+	public void stepStateChanged(StepExecutionStateEvent event) {
+	}
+
+	@Override
+	public void taskStateChanged(TaskExecutionStateEvent event) {
+		try {
+			postNotification(event.task().getId(), event.currentState().toString());
+		} catch (UnirestException e) {
+			// Silently fail
 		}
 	}
 }
